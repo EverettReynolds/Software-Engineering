@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<body>
+<style type="text/css">
+ p {margin-bottom: 0em;  margin-top: 0em;} 
+
+ * {
+  box-sizing: border-box;
+}
+
+.row {
+  display: flex;
+}
+
+
+.column {
+  flex: 50%;
+  padding: 10px;
+  
+}
+</style>
+<h1 id="lesson-header">Learn Chinese With Mulan
+
+</h1>
+<input type="image" src="img/ReadAloud.png" onclick="speakInEnglish()" />
+<p>第一课 我叫徐文长</p>
+
+<div class="row">
+	<div class="column" style="background-color:#bbb;">
+<table>
+	<tr>
+		<td>
+		<p id="pinyin-1">Wŏ jiào Xú WénCháng</p>
+		<p id="text-1" style="color:blue;font-size:30px;">我叫徐文长。</p>
+		<br>
+		</td>
+		<td>
+			<input type="image" src="img/ReadAloud.png" onclick="SpeakInMandrin(1)" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<p id="pinyin-2">Wŏ shì ZhōngGuó rén</p>
+			<p id="text-2" style="color:blue;font-size:30px;">我是中国人。</p>
+			<br>
+		</td>
+		<td>
+			<input type="image" src="img/ReadAloud.png" onclick="SpeakInMandrin(2)" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<p id="pinyin-3">Wŏ huì jiǎng gùshì</p>
+			<p id="text-3" style="color:blue;font-size:30px;">我会讲故事。</p>
+			<br>
+		</td>
+		<td>
+			<input type="image" src="img/ReadAloud.png" onclick="SpeakInMandrin(3)" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input type="image" style="background-color:rgb(255, 255, 255);"src="img/prev.png" onclick="nextPage()" />		
+		</td>
+		<td>
+			<input type="image" style="background-color:rgb(255, 255, 255);"src="img/next.png" onclick="nextPage()" />		
+		</td>
+	</tr>
+</table>
+</div>
+
+<div class="row">
+	<div class="column" style="background-color:#aaa;">
+<table>
+	<tr>
+		<img src="img/Lesson1Picture1.png" alt="Xu Wenchang portrait" width="180" height="268">
+	</tr>
+</table>
+</div>
+<br></br>
+
+
+<p id="demo"></p>
+
+<script>
+function SpeakInMandrin(id) {
+	var msg = new SpeechSynthesisUtterance();
+	//msg.text = "你好";
+	msg.text = document.getElementById("text-"+id).innerHTML;
+	msg.lang = 'zh-CN'
+	window.speechSynthesis.speak(msg);
+	document.getElementById("demo").innerHTML = 
+		document.getElementById("pinyin-"+id).innerHTML;
+}
+
+function speakInEnglish() {
+	var msg = new SpeechSynthesisUtterance();
+	//msg.text = "你好";
+	//msg.text = document.getElementById("lesson-header").innerHTML;
+	msg.text = "Learn Chinese With MooLaan";
+	msg.lang = 'en-US'
+	window.speechSynthesis.speak(msg);
+	document.getElementById("demo").innerHTML = 
+		document.getElementById("lesson-header").innerHTML;
+}
+
+// source : https://stackoverflow.com/questions/25566960/javascript-go-to-previous-next-page
+
+  function nextPage() { 
+
+    var page = 1;
+    var pageCount = 10;
+
+    display("Starting page: " + page);
+    document.getElementById("btnPrev").onclick = function() {
+      page = ((page + pageCount + 1) % pageCount) + 1;
+      display("previous, page now " + page);
+    };
+    document.getElementById("btnNext").onclick = function() {
+      page = (page % pageCount) + 1;
+      display("next, page now " + page);
+    };
+
+    function display(msg) {
+      var p = document.createElement('p');
+      p.innerHTML = String(msg);
+      document.body.appendChild(p);
+    }
+  }
+
+</script>
+
+</body>
+</html>
